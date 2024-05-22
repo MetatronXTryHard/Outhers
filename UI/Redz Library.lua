@@ -37,7 +37,7 @@ local redzlib = {
     Purple = {
       ["Color Hub 1"] = ColorSequence.new({
         ColorSequenceKeypoint.new(0.00, Color3.fromRGB(25, 25, 25)),
-        ColorSequenceKeypoint.new(0.50, Color3.fromRGB(20.5, 20.5, 20.5)),
+        ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32.5, 32.5, 32.5)),
         ColorSequenceKeypoint.new(1.00, Color3.fromRGB(25, 25, 25))
       }),
       ["Color Hub 2"] = Color3.fromRGB(25, 25, 25),
@@ -470,7 +470,7 @@ function redzlib:MakeWindow(Configs)
   local MainFrame = InsertTheme(Create("ImageButton", ScreenGui, {
     Size = UDim2.fromOffset(UISizeX, UISizeY),
     Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
-    BackgroundTransparency =  0.05, 
+    BackgroundTransparency =  0.07, 
     Name = "Hub"
   }), "Main")Make("Gradient", MainFrame, {
     Rotation = 45
