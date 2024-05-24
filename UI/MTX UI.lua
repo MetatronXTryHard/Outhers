@@ -22,19 +22,13 @@
 ]]
 
 local a=game:GetService("CoreGui")local b="MTX Client"local function c()local d=a:FindFirstChild(b)if d then d:Destroy()end end;c()
+local uis, txtservice, ts, rs, hs = game:GetService('UserInputService'), game:GetService('TextService'), game:GetService('TweenService'), game:GetService('RunService'), game:GetService('HttpService')
 local InputService, TeleportService, RunService, Workspace, Lighting, Players, HttpService, StarterGui, ReplicatedStorage, TweenService, VirtualUser, PathFindingService = game:GetService("UserInputService"), game:GetService("TeleportService"), game:GetService("RunService"), game:GetService("Workspace"), game:GetService("Lighting"), game:GetService("Players"), game:GetService("HttpService"), game:GetService("StarterGui"), game:GetService("ReplicatedStorage"), game:GetService("TweenService"), game:GetService("VirtualUser"), game:GetService("PathfindingService")
 local Mouse, Camera, LocalPlayer = Players.LocalPlayer:GetMouse(), Workspace.Camera, Players.LocalPlayer
 local NewVector2, NewVector3, NewCFrame, NewAngle, NewRGB, NewHex, NewInstance, Spawn, Wait, Create, Resume, SpinAngle, SpinSize, SpinSpeed, Huge, Pi, Clamp, Round, Abs, Floor, Random, Sin, Cos, Rad, Halfpi, Find, Clear, Sub, Upper, Lower, Insert = Vector2.new, Vector3.new, CFrame.new, CFrame.Angles, Color3.fromRGB, Color3.fromHex, Instance.new, task.spawn, task.wait, coroutine.create, coroutine.resume, 0, 25, 0, math.huge, math.pi, math.clamp, math.round, math.abs, math.floor, math.random, math.sin, math.cos, math.rad, math.pi/2, table.find, table.clear, string.sub, string.upper, string.lower, table.insert
 
+--- UI ---
 local ui = {}
-
-local uis = game:GetService('UserInputService')
-local txtservice = game:GetService('TextService')
-local ts = game:GetService('TweenService')
-local rs = game:GetService('RunService')
-local hs = game:GetService('HttpService')
-
-local HttpService = game:GetService("HttpService")
 local ENABLE_TRACEBACK = false
 local Signal = {}
 do
@@ -1170,7 +1164,7 @@ function Elements:Dropdown(options)
 	local min = options.min or 0
 	local max = options.max or #choices
 
-	if min>max then error('kill yourself (min is bigger than max)',2) end
+	if min>max then error('(min is bigger than max)',2) end
 	
 	local currentChild = #self._sector:GetChildren()
 	local zindexadd = 100
