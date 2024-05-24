@@ -2692,8 +2692,8 @@ function ui:Init(options)
 		local windowFrame = create('Frame',{
 			Parent = UIsHolder,
 			Name = 'Window',
-			BackgroundColor3 = Color3.fromRGB(23,23,23),
-			BackgroundTransparency = 0.030,
+			BackgroundColor3 = Color3.fromRGB(20,20,20),
+			BackgroundTransparency = 0.1,
 			BorderColor3 = Color3.fromRGB(0, 0, 0),
 			BorderSizePixel = 0,
 			Size = UDim2.new(0, 620, 0, 385),
@@ -2713,6 +2713,7 @@ function ui:Init(options)
 			Size = UDim2.new(0.270000011, 0, 1, 0),
 			BorderSizePixel = 0,
 		})
+		
 		Dragify(windowFrame,sideBar)
 		local window = {
 			tabs = {},
