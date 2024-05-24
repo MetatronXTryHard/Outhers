@@ -2414,8 +2414,8 @@ function Notify:warning()
 	coroutine.wrap(function()
 		local a = 0
 		while not shouldbreak do
-			Tween(grad,0.25,'Linear','In',{BackgroundColor3 = Color3.new() or self._options.color})
-			local t = Tween(grad2,0.25,'Linear','In',{BackgroundColor3 = Color3.new() or self._options.color})
+			Tween(grad,0.25,'Linear','In',{BackgroundColor3 = Color3.new(255, 0, 0) or self._options.color})
+			local t = Tween(grad2,0.25,'Linear','In',{BackgroundColor3 = Color3.new(255, 0, 0) or self._options.color})
 			t.Completed:Wait()
 			a+=1
 		end
@@ -2538,8 +2538,9 @@ function ui:Init(options)
 		local watermark = create('Frame',{
 			Name = "Watermark",
 			Parent = UIsHolder,
-			BackgroundColor3 = Color3.fromRGB(30, 30, 30),
+			BackgroundColor3 = Color3.fromRGB(20, 20, 20),
 			BorderSizePixel = 0,
+			BackgroundTransparency = 0.2,
 			Position = UDim2.new(0, 32, 0, 32),
 			Size = UDim2.new(0, 32, 0, 32),
 		})
@@ -3048,4 +3049,4 @@ function ui:Init(options)
 		return window
 	end
 end
-return ui
+ return ui
