@@ -27,6 +27,8 @@ local InputService, TeleportService, RunService, Workspace, Lighting, Players, H
 local Mouse, Camera, LocalPlayer = Players.LocalPlayer:GetMouse(), Workspace.Camera, Players.LocalPlayer
 local NewVector2, NewVector3, NewCFrame, NewAngle, NewRGB, NewHex, NewInstance, Spawn, Wait, Create, Resume, SpinAngle, SpinSize, SpinSpeed, Huge, Pi, Clamp, Round, Abs, Floor, Random, Sin, Cos, Rad, Halfpi, Find, Clear, Sub, Upper, Lower, Insert = Vector2.new, Vector3.new, CFrame.new, CFrame.Angles, Color3.fromRGB, Color3.fromHex, Instance.new, task.spawn, task.wait, coroutine.create, coroutine.resume, 0, 25, 0, math.huge, math.pi, math.clamp, math.round, math.abs, math.floor, math.random, math.sin, math.cos, math.rad, math.pi/2, table.find, table.clear, string.sub, string.upper, string.lower, table.insert
 
+IsMobile = false
+
 --- UI ---
 local ui = {}
 local ENABLE_TRACEBACK = false
@@ -2533,14 +2535,14 @@ function ui:Init(options)
 	function ui:Watermark(options)
 		local options = formatTable(options)
 
-		local text = options.text or 'Lynx'
+		local text = options.text or 'MTX'
 
 		local watermark = create('Frame',{
 			Name = "Watermark",
 			Parent = UIsHolder,
 			BackgroundColor3 = Color3.fromRGB(20, 20, 20),
 			BorderSizePixel = 0,
-			BackgroundTransparency = 0.15,
+			BackgroundTransparency = 0.25,
 			Position = UDim2.new(0, 32, 0, 32),
 			Size = UDim2.new(0, 32, 0, 32),
 		})
@@ -3049,4 +3051,66 @@ function ui:Init(options)
 		return window
 	end
 end
+local CheckMobile = function()
+	if game:GetService("UserInputService").TouchEnabled and not game:GetService("UserInputService"):GetPlatform() == Enum.Platform.Windows then
+		return true
+	end
+end 
+IsMobile = CheckMobile()
+if IsMobile then
+	local ClickButton = Instance.new("ScreenGui")
+	local MainFrame = Instance.new("Frame")
+	local ImageLabel = Instance.new("ImageLabel")
+	local TextButton = Instance.new("TextButton") 
+	local UICorner = Instance.new("UICorner") 
+	local UICorner_2 = Instance.new("UICorner")
+	if game.CoreGui:FindFirstChild("ClickButton") then 
+		game.CoreGui:FindFirstChild("ClickButton"):Destroy()
+	end
+	ClickButton.Name = "ClickButton"
+	ClickButton.Parent = game.CoreGui
+	ClickButton.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	
+	MainFrame.Name = "MainFrame"
+	MainFrame.Parent = ClickButton
+	MainFrame.Active = true
+	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+	MainFrame.BackgroundColor3 = Color3.new(1, 1, 1)
+	MainFrame.BorderColor3 = Color3.new(0, 0, 0)
+	MainFrame.BorderSizePixel = 0
+	MainFrame.Transparency = 1
+	MainFrame.Position = UDim2.new(0.187441245, 0, 0.476932675, 0)
+	MainFrame.Size = UDim2.new(0, 45, 0, 45)
+	
+	UICorner.CornerRadius = UDim.new(0, 100)
+	UICorner.Parent = MainFrame
+	
+	UICorner_2.CornerRadius = UDim.new(0, 100)
+	UICorner_2.Parent = ImageLabel
+	
+	ImageLabel.Parent = MainFrame
+	ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+	ImageLabel.BackgroundColor3 = Color3.new(0, 0, 0)
+	ImageLabel.BorderColor3 = Color3.new(0, 0, 0)
+	ImageLabel.BorderSizePixel = 0
+	ImageLabel.Position = UDim2.new(0.48888889, 0, 0.48888889, 0)
+	ImageLabel.Size = UDim2.new(0, 45, 0, 45)
+	ImageLabel.Image = "rbxassetid://16550588402"
+	
+	TextButton.Parent = MainFrame
+	TextButton.BackgroundColor3 = Color3.new(1, 1, 1)
+	TextButton.BackgroundTransparency = 1
+	TextButton.BorderColor3 = Color3.new(0, 0, 0)
+	TextButton.BorderSizePixel = 0
+	TextButton.Position = UDim2.new(3.3908421e-07, 0, 0, 0)
+	TextButton.Size = UDim2.new(0, 45, 0, 45)
+	TextButton.AutoButtonColor = false
+	TextButton.Font = Enum.Font.SourceSans
+	TextButton.Text = ""
+	TextButton.TextColor3 = Color3.new(255, 255, 255)
+	TextButton.TextSize = 15
+	TextButton.MouseButton1Click:Connect(function()
+		ui:Toggle()
+	end)
+end 
 return ui
