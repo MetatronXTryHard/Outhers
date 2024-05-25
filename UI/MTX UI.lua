@@ -3048,6 +3048,7 @@ function ui:Init(options)
 
 		return window
 	end
+end
 	local CheckMobile = function()
         if game:GetService("UserInputService").TouchEnabled and not game:GetService("UserInputService"):GetPlatform() == Enum.Platform.Windows then
 			return true
@@ -3111,8 +3112,7 @@ function ui:Init(options)
         TextButton.TextColor3 = Color3.new(255, 255, 255)
         TextButton.TextSize = 15
         TextButton.MouseButton1Click:Connect(function()
-			ui:Toggle()
+          ui:Toggle()
         end)
     end 
-end
 return ui
