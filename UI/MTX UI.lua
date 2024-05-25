@@ -3049,8 +3049,6 @@ function ui:Init(options)
 		return window
 	end
 end
-return ui
---[[
 	local CheckMobile = function()
         if game:GetService("UserInputService").TouchEnabled and not game:GetService("UserInputService"):GetPlatform() == Enum.Platform.Windows then
 			return true
@@ -3117,4 +3115,6 @@ return ui
           ui:Toggle()
         end)
     end 
---]]
+return ui
+
+
