@@ -2540,7 +2540,7 @@ function ui:Init(options)
 			Parent = UIsHolder,
 			BackgroundColor3 = Color3.fromRGB(20, 20, 20),
 			BorderSizePixel = 0,
-			BackgroundTransparency = 0.2,
+			BackgroundTransparency = 0.15,
 			Position = UDim2.new(0, 32, 0, 32),
 			Size = UDim2.new(0, 32, 0, 32),
 		})
@@ -2557,7 +2557,7 @@ function ui:Init(options)
 			RichText = true,
 			Text = text,
 			TextColor3 = Color3.fromRGB(255, 255, 255),
-			TextSize = 14,
+			TextSize = 15,
 			TextScaled = false,
 			TextWrapped = false,
 			TextXAlignment = "Left",
@@ -3115,4 +3115,3 @@ function ui:Init(options)
         end)
     end 
 end
-return ui
