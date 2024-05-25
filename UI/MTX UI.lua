@@ -3049,6 +3049,7 @@ function ui:Init(options)
 		return window
 	end
 end
+
 	local CheckMobile = function()
         if game:GetService("UserInputService").TouchEnabled and not game:GetService("UserInputService"):GetPlatform() == Enum.Platform.Windows then
 			return true
@@ -3059,7 +3060,8 @@ end
 	if not IsMobile then
 	IsMobile = false
 	ui:Notify{text = "PC Detected! Press F1 to Hide UI", time = 5, style = "Normal"}
-	elseif IsMobile then
+        end
+	if IsMobile then
         local ClickButton = Instance.new("ScreenGui")
         local MainFrame = Instance.new("Frame")
         local ImageLabel = Instance.new("ImageLabel")
@@ -3116,5 +3118,3 @@ end
         end)
     end 
 return ui
-
-
