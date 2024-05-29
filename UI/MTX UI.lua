@@ -830,7 +830,7 @@ function Elements:Title(options)
 		LayoutOrder = 1,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		Size = UDim2.new(1, 0, 0, description and 12 or 15),
+		Size = UDim2.new(1, 0, 0, description and 14 or 16),
 		ZIndex = mainHolder.ZIndex+1,
 		Font = Enum.Font.GothamMedium,
 		TextColor3 = Color3.fromRGB(200, 200, 200),
