@@ -2739,7 +2739,7 @@ function ui:Init(options)
 			BackgroundTransparency = 0.1,
 			BorderColor3 = Color3.fromRGB(0, 0, 0),
 			BorderSizePixel = 0,
-			Size = UDim2.new(0, 900, 0, 430),
+			Size = UDim2.new(0, 460, 0, 670),
 		})
 		windowFrame.Position = UDim2.new(0.5, -windowFrame.AbsoluteSize.X/2, 0.5, -windowFrame.AbsoluteSize.Y/2)
 
