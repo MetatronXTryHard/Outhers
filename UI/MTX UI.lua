@@ -25,9 +25,9 @@
 local CoreGui = game:GetService("CoreGui")
 local MTXUIWindow = "MTX Client"
 local function RemoveUI()
-	print("Duplicated UI Detected")
 	local CheckUI = CoreGui:FindFirstChild(MTXUIWindow)
 	if CheckUI then
+	print("Duplicated UI Detected")
 		for _, connection in next, Connections do
 			connection:Disconnect()
 		end
