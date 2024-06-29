@@ -21,15 +21,56 @@
 --// • Owner: metatron_exe
 ]]
 
-local a=game:GetService("CoreGui")local b="MTX Client"local function c()local d=a:FindFirstChild(b)if d then d:Destroy()end end;c()
+---[[ Anti Duplicate UI ]]---
+local CoreGui = game:GetService("CoreGui")
+local MTXUIWindow = "MTX Client"
+local function RemoveUI()
+	print("Duplicated UI Detected")
+	local CheckUI = CoreGui:FindFirstChild(MTXUIWindow)
+	if CheckUI then
+		for _, connection in next, Connections do
+			connection:Disconnect()
+		end
+		
+		UIsHolder:Destroy()	
+	end
+end;
+RemoveUI()
+
+---[[ Variables And Services ]]---
 local uis, txtservice, ts, rs, hs = game:GetService('UserInputService'), game:GetService('TextService'), game:GetService('TweenService'), game:GetService('RunService'), game:GetService('HttpService')
 local InputService, TeleportService, RunService, Workspace, Lighting, Players, HttpService, StarterGui, ReplicatedStorage, TweenService, VirtualUser, PathFindingService = game:GetService("UserInputService"), game:GetService("TeleportService"), game:GetService("RunService"), game:GetService("Workspace"), game:GetService("Lighting"), game:GetService("Players"), game:GetService("HttpService"), game:GetService("StarterGui"), game:GetService("ReplicatedStorage"), game:GetService("TweenService"), game:GetService("VirtualUser"), game:GetService("PathfindingService")
 local Mouse, Camera, LocalPlayer = Players.LocalPlayer:GetMouse(), Workspace.Camera, Players.LocalPlayer
 local NewVector2, NewVector3, NewCFrame, NewAngle, NewRGB, NewHex, NewInstance, Spawn, Wait, Create, Resume, SpinAngle, SpinSize, SpinSpeed, Huge, Pi, Clamp, Round, Abs, Floor, Random, Sin, Cos, Rad, Halfpi, Find, Clear, Sub, Upper, Lower, Insert = Vector2.new, Vector3.new, CFrame.new, CFrame.Angles, Color3.fromRGB, Color3.fromHex, Instance.new, task.spawn, task.wait, coroutine.create, coroutine.resume, 0, 25, 0, math.huge, math.pi, math.clamp, math.round, math.abs, math.floor, math.random, math.sin, math.cos, math.rad, math.pi/2, table.find, table.clear, string.sub, string.upper, string.lower, table.insert
-
 IsMobile = false
 
---- UI ---
+---[[ SystemChecker ]]---
+getgenv().SystemChecker = {
+    ["Connections"] = {},
+	["VersionLD"] = {UIVersion = {"0.0.1"}},
+	["Account"] = {Username = LocalPlayer.Name, DisplayName = LocalPlayer.DisplayName, UserID = LocalPlayer.UserId, AccountAge = LocalPlayer.AccountAge, Game = game.PlaceId},
+    ["Files"] = {Folders = {"UI", "UI/Configs"}},
+    ["Config"] = {},
+}
+
+local function printTable(tbl, indent)
+    indent = indent or 0
+    for key, value in pairs(tbl) do
+        if type(value) == "table" then
+            print(("\t"):rep(indent) .. tostring(key) .. " = {")
+            printTable(value, indent + 1)
+            print(("\t"):rep(indent) .. "}")
+        else
+            print(("\t"):rep(indent) .. tostring(key) .. " = " .. tostring(value))
+        end
+    end
+end
+if getgenv().DebugMode then
+print("Version |", getgenv().SystemChecker.VersionLD.UIVersion[1])
+printTable(getgenv().SystemChecker.Account)
+end
+
+---[[ UI ]]---
 local ui = {}
 local ENABLE_TRACEBACK = false
 local Signal = {}
@@ -46,7 +87,6 @@ do
 		self._bindableEvent = Instance.new("BindableEvent")
 		self._argMap = {}
 		self._source = ENABLE_TRACEBACK and debug.traceback() or ""
-
 		self._bindableEvent.Event:Connect(function(key)
 			self._argMap[key] = nil
 			if (not self._bindableEvent) and (not next(self._argMap)) then
@@ -2540,9 +2580,9 @@ function ui:Init(options)
 		local watermark = create('Frame',{
 			Name = "Watermark",
 			Parent = UIsHolder,
-			BackgroundColor3 = Color3.fromRGB(20, 20, 20),
+			BackgroundColor3 = Color3.fromRGB(15, 15, 15),
 			BorderSizePixel = 0,
-			BackgroundTransparency = 0.25,
+			BackgroundTransparency = 0.20,
 			Position = UDim2.new(0, 32, 0, 32),
 			Size = UDim2.new(0, 32, 0, 32),
 		})
@@ -2699,7 +2739,7 @@ function ui:Init(options)
 			BackgroundTransparency = 0.1,
 			BorderColor3 = Color3.fromRGB(0, 0, 0),
 			BorderSizePixel = 0,
-			Size = UDim2.new(0, 620, 0, 385),
+			Size = UDim2.new(0, 800, 0, 450),
 		})
 		windowFrame.Position = UDim2.new(0.5, -windowFrame.AbsoluteSize.X/2, 0.5, -windowFrame.AbsoluteSize.Y/2)
 
