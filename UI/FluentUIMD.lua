@@ -14,11 +14,31 @@ if not game:IsLoaded() then
    warn("Waiting for the game to load..")
    game.Loaded:Wait();
 end
-local Success, error = pcall(function()
-local InputService, TeleportService, RunService, Workspace, Lighting, Players, HttpService, StarterGui, ReplicatedStorage, TweenService, VirtualUser, PathFindingService = game:GetService("UserInputService"), game:GetService("TeleportService"), game:GetService("RunService"), game:GetService("Workspace"), game:GetService("Lighting"), game:GetService("Players"), game:GetService("HttpService"), game:GetService("StarterGui"), game:GetService("ReplicatedStorage"), game:GetService("TweenService"), game:GetService("VirtualUser"), game:GetService("PathfindingService")
-local Mouse, Camera, LocalPlayer = Players.LocalPlayer:GetMouse(), Workspace.Camera, Players.LocalPlayer
-local NewRay, NewVector2, NewVector3, NewCFrame, NewAngle, NewRGB, NewHex, NewInstance, Spawn, Wait, Create, Resume, SpinAngle, SpinSize, SpinSpeed, Huge, Pi, Clamp, Round, Abs, Floor, Random, Sin, Cos, Rad, Halfpi, Find, Clear, Sub, Upper, Lower, Insert = Ray.new, Vector2.new, Vector3.new, CFrame.new, CFrame.Angles, Color3.fromRGB, Color3.fromHex, Instance.new, task.spawn, task.wait, coroutine.create, coroutine.resume, 0, 25, 0, math.huge, math.pi, math.clamp, math.round, math.abs, math.floor, math.random, math.sin, math.cos, math.rad, math.pi/2, table.find, table.clear, string.sub, string.upper, string.lower, table.insert
 
+getgenv().UICfg = {
+    ["Connections"] = {},
+    ["VersionLD"] = {UIVersion = {"0.0.1"}},
+    ["Account"] = {Username = LocalPlayer.Name, DisplayName = LocalPlayer.DisplayName, UserID = LocalPlayer.UserId, AccountAge = LocalPlayer.AccountAge, Game = game.PlaceId},
+    ["Files"] = {Folders = {"FluentCfg", "FluentCfg/Configs"}},
+    ["Config"] = {},
+}
+
+local Success, error = pcall(function();
+for _, folder in ipairs(MTXClientCfg.Files.Folders) do
+    makefolder(folder);
+end;
+
+local ConfigPath = "FluentCfg/Configs/Config.lua"
+if not isfile(ConfigPath) then 
+    warn("Creating ConfigPath to |", ConfigPath)
+    writefile(ConfigPath, "")
+end 
+end)
+if not Success then
+  print("ConfigPath Error");
+end;
+
+local Fluent = {}
 local L_1_, L_2_ = {
 	{
 		1,
@@ -4707,8 +4727,4 @@ do
 		end
 	end
 end
-end)
-if not Success then
-    warn("Falha ao Iniciar O Script No servidor: ", error);
-     game.Players.LocalPlayer:Kick("Error Code #1 (Falha ao Iniciar O Script No servidor)", error)
-end;
+return Fluent
