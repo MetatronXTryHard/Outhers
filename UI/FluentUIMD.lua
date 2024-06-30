@@ -25,7 +25,6 @@ local Client = game:GetService("Players").LocalPlayer
      ["Config"] = {},
  }
 
- local Success, error = pcall(function();
     for _, folder in ipairs(UICfg.Files.Folders) do
         makefolder(folder);
     end;
@@ -35,10 +34,6 @@ local Client = game:GetService("Players").LocalPlayer
         warn("Creating ConfigPath to |", ConfigPath)
         writefile(ConfigPath, "")
     end 
-    end)
-    if not Success then
-      print("ConfigPath Error");
-    end;
 
 local L_1_, L_2_ = {
 	{
