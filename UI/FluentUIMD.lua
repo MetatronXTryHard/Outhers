@@ -11,34 +11,35 @@
 ]]
 
 if not game:IsLoaded() then
-   warn("Waiting for the game to load..")
-   game.Loaded:Wait();
-end
+    warn("Waiting for the game to load..")
+    game.Loaded:Wait();
+ end
+ 
+local Client = game:GetService("Players").LocalPlayer
 
-getgenv().UICfg = {
-    ["Connections"] = {},
-    ["VersionLD"] = {UIVersion = {"0.0.1"}},
-    ["Account"] = {Username = LocalPlayer.Name, DisplayName = LocalPlayer.DisplayName, UserID = LocalPlayer.UserId, AccountAge = LocalPlayer.AccountAge, Game = game.PlaceId},
-    ["Files"] = {Folders = {"FluentCfg", "FluentCfg/Configs"}},
-    ["Config"] = {},
-}
+ getgenv().UICfg = {
+     ["Connections"] = {},
+     ["VersionLD"] = {UIVersion = {"0.0.1"}},
+     ["Account"] = {Username = Client.Name, DisplayName = Client.DisplayName, UserID = Client.UserId, AccountAge = Client.AccountAge, Game = game.PlaceId},
+     ["Files"] = {Folders = {"FluentCfg", "FluentCfg/Configs"}},
+     ["Config"] = {},
+ }
 
-local Success, error = pcall(function();
-for _, folder in ipairs(MTXClientCfg.Files.Folders) do
-    makefolder(folder);
-end;
+ local Success, error = pcall(function();
+    for _, folder in ipairs(UICfg.Files.Folders) do
+        makefolder(folder);
+    end;
+    
+    local ConfigPath = "FluentCfg/Configs/Config.lua"
+    if not isfile(ConfigPath) then 
+        warn("Creating ConfigPath to |", ConfigPath)
+        writefile(ConfigPath, "")
+    end 
+    end)
+    if not Success then
+      print("ConfigPath Error");
+    end;
 
-local ConfigPath = "FluentCfg/Configs/Config.lua"
-if not isfile(ConfigPath) then 
-    warn("Creating ConfigPath to |", ConfigPath)
-    writefile(ConfigPath, "")
-end 
-end)
-if not Success then
-  print("ConfigPath Error");
-end;
-
-local Fluent = {}
 local L_1_, L_2_ = {
 	{
 		1,
@@ -4727,4 +4728,3 @@ do
 		end
 	end
 end
-return Fluent
