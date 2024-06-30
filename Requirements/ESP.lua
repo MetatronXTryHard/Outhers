@@ -1,4 +1,4 @@
--- Settings --
+----[[ Settings ]]----
 local ESP = {
     Enabled = false,
     Boxes = false,
@@ -22,7 +22,7 @@ local ESP = {
     Overrides = {}
 }
 
--- Declarations --
+----[[ Declarations ]]----
 local Camera = workspace.CurrentCamera
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
@@ -31,7 +31,7 @@ local Mouse = LocalPlayer:GetMouse()
 local V3new = Vector3.new
 local WorldToViewportPoint = Camera.WorldToViewportPoint
 
--- Functions --
+----[[ Functions ]]----
 local function Draw(obj, props)
     local new = Drawing.new(obj)
 
