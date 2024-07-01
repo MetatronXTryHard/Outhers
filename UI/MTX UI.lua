@@ -24,6 +24,7 @@
 ---[[ Anti Duplicate UI ]]---
 local CoreGui = game:GetService("CoreGui")
 local MTXUIWindow = "MTX Client"
+--[[
 local function RemoveUI()
 	local CheckUI = CoreGui:FindFirstChild(MTXUIWindow)
 	if CheckUI then
@@ -35,6 +36,7 @@ local function RemoveUI()
 	end
 end;
 RemoveUI()
+]]
 
 ---[[ Variables And Services ]]---
 local uis, txtservice, ts, rs, hs = game:GetService('UserInputService'), game:GetService('TextService'), game:GetService('TweenService'), game:GetService('RunService'), game:GetService('HttpService')
