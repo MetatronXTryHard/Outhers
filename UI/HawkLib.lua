@@ -1,5 +1,7 @@
 --[[
-     UI By metatron_exe | And MTX Team / discord.gg/mtxstore
+-- Image Function is firstly made by __spyro. After the ui libs with image function probably skidded this source
+
+         UI By metatron_exe | And MTX Team / discord.gg/mtxstore
 
 ███╗   ███╗████████╗██╗  ██╗     ██████╗██╗     ██╗███████╗███╗   ██╗████████╗
 ████╗ ████║╚══██╔══╝╚██╗██╔╝    ██╔════╝██║     ██║██╔════╝████╗  ██║╚══██╔══╝
@@ -20,6 +22,7 @@
 --// • Developers: MTX-Team and Spyro </>
 --// • Owner: metatron_exe
 ]]
+
 
 local UserInputService = game:GetService("UserInputService")
 local OnPc = not UserInputService.TouchEnabled and UserInputService.KeyboardEnabled and UserInputService.MouseEnabled
@@ -6592,7 +6595,7 @@ function HawkLib:Window(Win)
 end
 
 function HawkLib:AddNotifications()
-	if _MTXUIAPI = "lcBEryOpTBUMzUASRtUTHbeFMkrRZBeo" then
+	if _MTXUIAPI == "lcBEryOpTBUMzUASRtUTHbeFMkrRZBeo" then
 		local NotifyListing = Instance.new("Frame")
 		local NotifyLayout = Instance.new("UIListLayout")
 		local NotifyCorner = Instance.new("UICorner")
