@@ -122,11 +122,11 @@ local HawkLib = {
 
 	Themes = {
 		Dark = {
-			Main = Color3.fromRGB(25, 25, 25),
+			Main = Color3.fromRGB(20, 20, 20),
 			Shadow = Color3.fromRGB(0, 0, 0),
 			TitleBar = Color3.fromRGB(31, 31, 31),
 			TabBefore = Color3.fromRGB(33, 33, 33),
-			TabAfter = Color3.fromRGB(41, 41, 41),
+			TabAfter = Color3.fromRGB(35, 35, 35),
 			TitleTextColor = Color3.fromRGB(255, 255, 255),
 			TabTextColor = Color3.fromRGB(255, 255, 255),
 			TitleLineColor = Color3.fromRGB(44, 44, 44),
@@ -307,7 +307,7 @@ coroutine.wrap(
 local notiftheme;
 
 function HawkLib:Window(Win)
-	if getgenv().MTX_UIAPI == "lcBEryOpTBUMzUASRtUTHbeFMkrRZBeo" then
+	if _MTX_UIAPI == "lcBEryOpTBUMzUASRtUTHbeFMkrRZBeo" then
 		local ScriptName;
 		local DestroyIfExists;
 		local Theme;
@@ -6592,7 +6592,7 @@ function HawkLib:Window(Win)
 end
 
 function HawkLib:AddNotifications()
-	if _Hawk == "ohhahtuhthttouttpwuttuaunbotwo" then
+	if _MTX_UIAPI = "lcBEryOpTBUMzUASRtUTHbeFMkrRZBeo" then
 		local NotifyListing = Instance.new("Frame")
 		local NotifyLayout = Instance.new("UIListLayout")
 		local NotifyCorner = Instance.new("UICorner")
