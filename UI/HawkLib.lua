@@ -17,7 +17,7 @@
         Luauth v2.5 for Roblox, #1 lua whitelisting system by Federal#9999
 
 --// • Discord Server: https://discord.gg/pzV9Zfcd
---// • Developers: MTX-Team </>
+--// • Developers: MTX-Team and Spyro </>
 --// • Owner: metatron_exe
 ]]
 
@@ -307,7 +307,7 @@ coroutine.wrap(
 local notiftheme;
 
 function HawkLib:Window(Win)
-	if _MTX_UIAPI == "lcBEryOpTBUMzUASRtUTHbeFMkrRZBeo" then
+	if _MTXUIAPI == "lcBEryOpTBUMzUASRtUTHbeFMkrRZBeo" then
 		local ScriptName;
 		local DestroyIfExists;
 		local Theme;
@@ -6592,7 +6592,7 @@ function HawkLib:Window(Win)
 end
 
 function HawkLib:AddNotifications()
-	if _MTX_UIAPI = "lcBEryOpTBUMzUASRtUTHbeFMkrRZBeo" then
+	if _MTXUIAPI = "lcBEryOpTBUMzUASRtUTHbeFMkrRZBeo" then
 		local NotifyListing = Instance.new("Frame")
 		local NotifyLayout = Instance.new("UIListLayout")
 		local NotifyCorner = Instance.new("UICorner")
