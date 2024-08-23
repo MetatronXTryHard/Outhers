@@ -35,9 +35,13 @@ Window:Minimize()
 ## Create Window Tabs
 
 ```lua
-local MyTab = Window:MakeTab({"Um", "cherry"}) 
-```
+local MyTab = Window:MakeTab({Title = "Tab Name", Icon = "layers"})
 
+--[[
+-- Title = "This will be the name of the created tab, you can change it to main if you want"
+-- Icon = "the second argument is the icon that will be used, you can enter its name or your asset id"
+]]
+```
 
 ## Destroy Instances
 
