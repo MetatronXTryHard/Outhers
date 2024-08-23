@@ -42,7 +42,7 @@ local redzlib = {
       }),
       ["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
       ["Color Stroke"] = Color3.fromRGB(40, 40, 40),
-      ["Color Theme"] = Color3.fromRGB(150, 0, 255),
+      ["Color Theme"] = Color3.fromRGB(105, 0, 255),
       ["Color Text"] = Color3.fromRGB(240, 240, 240),
       ["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
     }
@@ -53,7 +53,7 @@ local redzlib = {
   Save = {
     UISize = {550, 380},
     TabSize = 160,
-    Theme = "Darker"
+    Theme = "Purple"
   },
   Settings = {},
   Connection = {},
@@ -62,7 +62,7 @@ local redzlib = {
   Options = {},
   Flags = {},
   Tabs = {},
-  Icons = loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/RedzLibV5/main/Icons.Lua"))()
+  Icons = loadstring(game:HttpGet("https://raw.githubusercontent.com/MetatronXTryHard/Outhers/main/UI/RedzLibV5-main/Icons.Lua"))()
 }
 
 local ViewportSize = workspace.CurrentCamera.ViewportSize
