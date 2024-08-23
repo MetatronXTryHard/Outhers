@@ -43,6 +43,43 @@ local MyTab = Window:MakeTab({Title = "Tab Name", Icon = "layers"})
 ]]
 ```
 
+## Set Init Tab
+
+```lua
+Window:SelectTab(MyTab)
+
+--[[
+-- SelectTab = "You can select a tab for when the script starts on it"
+]]
+```
+
+## Create Section
+
+```lua
+local MySection = MyTab:AddSection({Title = "New Section"})
+
+--[[
+-- Title = "the name of the created selection"
+]]
+```
+
+## Create Paragraph
+
+```lua
+local MyParagraph = MyTab:AddParagraph({Title = "Paragraph", Text = "This is a Paragraph\nSecond Line"})
+
+--[[
+-- Title = "the name of the created Paragraph"
+-- Text = "and the text that the paragraph will contain"
+]]
+```
+
+
+
+
+
+
+
 ## Destroy Instances
 
 ```lua
