@@ -24,6 +24,10 @@ local MyWindow = redzlib:MakeWindow({
 
 ```lua
 redzlib:SetScale(475)
+
+--[[
+-- SetScale = "you can change the window scale for a better experience"
+]]
 ```
 
 ## Set Window Visible
