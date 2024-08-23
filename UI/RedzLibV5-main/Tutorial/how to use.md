@@ -1,11 +1,23 @@
 ## Create Window
 
 ```lua
-local Window = redzlib:MakeWindow({
-    Title = "MTX Client",
-    SubTitle = "Powered By MTX Team",
-    SaveFolder = "MTXClientCfg.lua"
+local MyWindow = redzlib:MakeWindow({
+    Title = "New Window",
+    SubTitle = "SubTitle",
+    SaveFolder = "NewConfigFounder.json"
 })
+```
+
+## Set Window Scale
+
+```lua
+redzlib:SetScale(475)
+```
+
+## Set Window Visible
+
+```lua
+Window:Minimize()
 ```
 
 ## Destroy Instances
