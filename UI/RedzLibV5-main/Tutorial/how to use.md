@@ -34,6 +34,10 @@ redzlib:SetScale(475)
 
 ```lua
 Window:Minimize()
+
+--[[
+-- Minimize = "Allows you to make the UI invisible"
+]]
 ```
 
 ## Create Window Tabs
