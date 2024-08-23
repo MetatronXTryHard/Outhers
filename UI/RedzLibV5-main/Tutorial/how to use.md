@@ -1,3 +1,9 @@
+## Start UI/lib
+
+```lua
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/MetatronXTryHard/Outhers/main/UI/RedzLibV5-main/Source.Lua"))();
+```
+
 ## Create Window
 
 ```lua
@@ -6,6 +12,12 @@ local MyWindow = redzlib:MakeWindow({
     SubTitle = "SubTitle",
     SaveFolder = "NewConfigFounder.json"
 })
+
+--[[
+-- Title = "the name of the window that will appear"
+-- SubTitle = "the Sub Title of the window recommended for credits"
+-- SaveFolder = "the name of the folder that stores the status of the functions"
+]]
 ```
 
 ## Set Window Scale
@@ -19,6 +31,13 @@ redzlib:SetScale(475)
 ```lua
 Window:Minimize()
 ```
+
+## Create Window Tabs
+
+```lua
+local MyTab = Window:MakeTab({"Um", "cherry"}) 
+```
+
 
 ## Destroy Instances
 
