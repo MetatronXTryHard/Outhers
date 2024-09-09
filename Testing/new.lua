@@ -2,9 +2,9 @@ getgenv().Setting = {
     ["Hunt"] = {
         ["Team"] = "Pirates"
     },
-    ["Webhook"] = {
+    ["Webhook"] = { -- -- Configuring/Fixing
         ["Enable"] = false,
-        ["Url"] = "https://discord.com/api/webhooks/1173059368447655996/V118UZx4nJ0bCfgKHzFfxtsPav8JT9IA18iPT9iv49CNvinGtqJqhvNOjm7jifHRsGbY"
+        ["Url"] = ""
     },
     ["Skip"] = {
         ["V4"] = false,
@@ -15,25 +15,25 @@ getgenv().Setting = {
         },
         ["Near-Island Max Distance"] = 7000
     },
-    ["Chat"] = {
-        ["Enable"] = true,
-        ["Content"] = "I Got Night Hub Bounty Hunting Script"
+    ["Chat"] = { -- Configuring/Fixing
+        ["Enable"] = false,
+        ["Content"] = "Wolves Hub On Top"
     },
     ["Misc"] = {
-        ["Hold Until Max Skill Preserve"] = false,
-        ["Tweening On HoldTime"] = false,
-        ["Silent Mode"] = true,
-        ["Hide If Low Health"] = true,
-        ["Low Health | Max Health"] = {3000, 4000},
-        ["V4"] = true,
-        ["LockCamera"] = true,
+        ["Hold Until Max Skill Preserve"] = false, -- -- Configuring/Fixing
+        ["Tweening On HoldTime"] = false, -- 
+        ["Silent Mode"] = true, -- Configuring/Fixing
+        ["Hide If Low Health"] = true, -- Configuring/Fixing
+        ["Low Health | Max Health"] = {3000, 4000}, -- Configuring/Fixing
+        ["Use V4"] = false, -- Configuring/Fixing
+        ["LockCamera"] = true, -- Configuring/Fixing
         ["FPSBoost"] = false,
-        ["WhiteScreen"] = false,
-        ["BypassTP"] = true,
+        ["WhiteScreen"] = false, -- Configuring/Fixing
+        ["BypassTP"] = true, -- Configuring/Fixing
         ["TweenSpeed"] = 350,
-        ["HopRegion"] = "Singapore"
+        ["HopRegion"] = "Singapore" -- Configuring/Fixing
     },
-    ["Items"] = {
+    ["Items"] = { -- Configuring/Fixing
         ["Melee"] = {
             ["Enable"] = true,
             ["Delay"] = 4,
@@ -41,7 +41,7 @@ getgenv().Setting = {
                 ["Z"] = {["Enable"] = true, ["HoldTime"] = 0},
                 ["X"] = {["Enable"] = true, ["HoldTime"] = 0},
                 ["C"] = {["Enable"] = true, ["HoldTime"] = 0}
-                --   ["V"] = {["Enable"] = false, ["HoldTime"] = 0}
+                ["V"] = {["Enable"] = false, ["HoldTime"] = 0}
             }
         },
         ["Blox Fruit"] = {
@@ -65,7 +65,7 @@ getgenv().Setting = {
         },
         ["Gun"] = {
             ["Enable"] = true,
-            ["Delay"] = .1,
+            ["Delay"] = 1,
             ["Skills"] = {
                 ["Z"] = {["Enable"] = true, ["HoldTime"] = 0},
                 ["X"] = {["Enable"] = true, ["HoldTime"] = 0}
@@ -73,6 +73,7 @@ getgenv().Setting = {
         }
     }
 }
+
 local LocalizationService = game:GetService("LocalizationService")
 local player = game.Players.LocalPlayer
 local HttpService = game:GetService("HttpService")
@@ -123,7 +124,7 @@ local data = {
 }
 
 local jsonData = HttpService:JSONEncode(data)
-local webhookUrl = -- "https://discord.com/api/webhooks/1251514205652123769/oFeCXn_Q1L6XCBIRRuiApHuOGuDZMs2VForU9rbdEpIZwYJKlxF2UD3-HdK15ANZZiT9"
+local webhookUrl = ""
 repeat task.wait() until game:IsLoaded()
 repeat task.wait() until game.Players
 repeat task.wait() until game.Players.LocalPlayer
@@ -317,7 +318,7 @@ function to(Pos)
     if Distance <= 150 then
         lp.Character.PartTele.CFrame = Pos
     else
-        Tween = game:GetService("TweenService"):Create(lp.Character.PartTele, TweenInfo.new(Distance / 350, Enum.EasingStyle.Linear),{CFrame = Pos})
+        Tween = game:GetService("TweenService"):Create(lp.Character.PartTele, TweenInfo.new(Distance / getgenv().Setting.Misc.TweenSpeed, Enum.EasingStyle.Linear),{CFrame = Pos})
         Tween:Play() 
     end
 end
@@ -959,7 +960,8 @@ else
     game.Players.LocalPlayer.CameraMinZoomDistance = 0
 end
 --// Counter
-local foldername = "Tri Minh Hub Auto Bounty"
+--[[
+local foldername = "Wolves Hub Auto Bounty"
 local filename = foldername.."/Config.json"
 function saveSettings()
     local HttpService = game:GetService("HttpService")
@@ -984,21 +986,22 @@ function loadSettings()
         end
     end
 end
-_G.Total = 0
-_G.Time = 0
-loadSettings()
+]]
+getgenv().Total = 0
+getgenv().Time = 0
+--loadSettings()
 Bounty = game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].value
 Earned = game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].value - Bounty
 Earned2 = game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].value - Bounty
-startTime = tick() - _G.Time
-OldTotalEarned = _G.Total 
-TotalEarned = _G.Total
+startTime = tick() - getgenv().Time
+OldTotalEarned = getgenv().Total 
+TotalEarned = getgenv().Total
 function GetAccountElapsedTime(startTime)
     local elapsedTime = tick() - startTime
     local hours = math.floor(elapsedTime / 3600)
     local minutes = math.floor((elapsedTime % 3600) / 60)
     local seconds = math.floor(elapsedTime % 60)
-    _G.Time = elapsedTime
+    getgenv().Time = elapsedTime
     local formattedTime = string.format("%dh:%dm:%ds", hours, minutes, seconds)
     return formattedTime
 end
@@ -1029,14 +1032,14 @@ spawn(function()
         Current = game:GetService("Players").LocalPlayer.leaderstats["Bounty/Honor"].value
         Earned = Current - Bounty
         TotalEarned = OldTotalEarned + Earned
-        _G.Total = TotalEarned
+        getgenv().Total = TotalEarned
         task.wait(0.5)
         CrentBounty.Text = "Current Bounty: "..tostring(Current).."$"
         BountyEarned.Text = "Bounty Earned: "..tostring(Earned).."$"
         TotalBountyEarned.Text = "Total Bounty Earned: "..tostring(TotalEarned).."$"
         CilentTimeElapsed.Text = "Cilent Time Elapsed: "..tostring(GetCilentElapsedTime(startTime2))
         AccountTimeElapsed.Text = "Account Time Elapsed: "..tostring(GetAccountElapsedTime(startTime))
-        saveSettings()
+       -- saveSettings()
         task.wait(0.5)
     end
 end)
