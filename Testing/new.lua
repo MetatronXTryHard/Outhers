@@ -1,5 +1,3 @@
-
-if not getgenv().Config then
 getgenv().Config = {
 	["Chat"] = {
 		""
@@ -15,8 +13,10 @@ getgenv().Config = {
 		["FPS Boost"] = false,
 		["Tween"] = true,
 		["Random & Store Fruit"] = false
-}};
-end
+}}
+
+
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/MetatronXTryHard/Outhers/main/Testing/new.lua", true))();
 
 local player = game:GetService("Players").LocalPlayer;
 local playerGui = player.PlayerGui;
@@ -73,20 +73,18 @@ local LocalPlayer = Players.LocalPlayer;
 
 if getgenv().Config.Misc["Random & Store Fruit"] then
 	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Cousin", "Buy")
-	for v32, v33 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-		if v33:IsA("Tool") and string.find(v33.Name, "Fruit") then
-			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit", v33:GetAttribute("OriginalName"), v33)
+	for i, Store in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+		if Store:IsA("Tool") and string.find(Store.Name, "Fruit") then
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit", Store:GetAttribute("OriginalName"), Store)
 		end
 	end
 
-	for v34, v35 in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-		if v35:IsA("Tool") and string.find(v35.Name, "Fruit") then
-			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit", v35:GetAttribute("OriginalName"), v35)
+	for i, Fruit in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+		if Fruit:IsA("Tool") and string.find(Fruit.Name, "Fruit") then
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit", Fruit:GetAttribute("OriginalName"), Fruit)
 		end
 	end
 end
-
-
 
 if getgenv().Config.Misc["Enable Lock Bounty"] and not (LocalPlayer.leaderstats["Bounty/Honor"].Value > tonumber(getgenv().Config.Misc["Lock Bounty"][1])) or not (LocalPlayer.leaderstats["Bounty/Honor"].Value < tonumber(getgenv().Config.Misc["Lock Bounty"][2])) then
 	LocalPlayer:Kick("Lock Bounty")
@@ -108,428 +106,276 @@ for v38, v39 in pairs(getnilinstances()) do
 	end
 end
 
-local v3 = game.PlaceId
+local CheckID = game.PlaceId
 
-if v3 == 2753915549 then
-
-	Workspace_ = true
-
-	v3_ = {
-
+if CheckID == 2753915549 then
+	Sea1 = true
+	Pos = {
 		Vector3.new(- 7894.6201171875, 5545.49169921875, - 380.246346191406),
-
 		Vector3.new(- 4607.82275390625, 872.5422973632812, - 1667.556884765625),
-
 		Vector3.new(61163.8515625, 11.759522438049316, 1819.7841796875),
-
 		Vector3.new(3876.280517578125, 35.10614013671875, - 1939.3201904296875)
+    }
 
-	}
-
-elseif v3 == 4442272183 then
-
-	v4_ = true
-
-	v3_ = {
-
+elseif CheckID == 4442272183 then
+	Sea2 = true
+	Pos = {
 		Vector3.new(- 288.46246337890625, 306.130615234375, 597.9988403320312),
-
 		Vector3.new(2284.912109375, 15.152046203613281, 905.48291015625),
-
 		Vector3.new(923.21252441406, 126.9760055542, 32852.83203125),
-
 		Vector3.new(- 6508.5581054688, 89.034996032715, - 132.83953857422)
-
 	}
-
-elseif v3 == 7449423635 then
-
-	v5_ = true
-
-	v3_ = {
-
+	
+elseif CheckID == 7449423635 then
+	Sea3 = true
+	Pos = {
 		Vector3.new(- 5058.77490234519, 314.5155029297924, - 3155.88330079218),
-
 		Vector3.new(5756.83740234375, 610.4240112304688, - 253.9253692627321),
-
 		Vector3.new(- 12463.8740234375, 374.9144592287017, - 7523.77392579431),
-
 		Vector3.new(28282.5704095, 14896.8505859375, 105.1042709351036),
-
 		Vector3.new(- 11993.580079045, 334.7812805176547, - 8844.1826173214),
-
 		Vector3.new(5314.58204105, 25.419387817383522, - 125.94227600143541)
-
 	}
 
 end
 
-function v6_(v40)
+function FindClosestPosition(target)
+    local targetPosition = target.Position
+    local closestPosition = Vector3.new(0, 0, 0)
+    local shortestDistance = math.huge
 
-	local v41 = v40.Position
+    for _, currentPos in pairs(Pos) do
+        local distance = (currentPos - targetPosition).Magnitude
+        if distance < shortestDistance and closestPosition ~= currentPos then
+            closestPosition = currentPos
+            shortestDistance = distance
+        end
+    end
 
-	local v42, v43 = Vector3.new(0, 0, 0), math.huge
-
-	for v44, v45 in pairs(v3_) do
-
-		if (v45 - v41).Magnitude < v43 and v42 ~= v45 then
-
-			v42, v43 = v45, (v45 - v41).Magnitude
-
-		end
-
-	end
-
-	return v42
-
-end 
-
-function v7_(v46)
-
-	if LocalPlayer.Character:FindFirstChild("PartTele") then
-
-		LocalPlayer.Character.PartTele.CFrame = CFrame.new(LocalPlayer.Character.PartTele.CFrame.X, 1000, LocalPlayer.Character.PartTele.CFrame.Z)
-
-		task.wait(0.5)
-
-		if v8_() then
-
-			return
-
-		end
-
-		LocalPlayer.Character.PartTele.CFrame = v46
-
-		task.wait(0.5)
-
-		LocalPlayer.Character.PrimaryPart.CFrame = v46
-
-		LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
-
-		task.wait(1)
-
-		repeat
-
-			task.wait(1.5)
-
-		until LocalPlayer.Character:FindFirstChild("Humanoid") and LocalPlayer.Character.Humanoid.Health <= 0
-
-		repeat
-
-			task.wait()
-
-			if LocalPlayer.Character:FindFirstChild("PartTele") then
-
-				LocalPlayer.Character.PartTele.CFrame = v46
-
-			end
-
-			if LocalPlayer.Character:FindFirstChild("PrimaryPart") then
-
-				LocalPlayer.Character.PrimaryPart.CFrame = v46
-
-			end
-
-		until LocalPlayer.Character:FindFirstChild("Humanoid") and LocalPlayer.Character.Humanoid.Health > 0
-
-	end
-
+    return closestPosition
 end
 
-function v9_(v47)
+function TPToPosition(targetPosition)
+    local character = LocalPlayer.Character
+    local partTele = character:FindFirstChild("PartTele")
 
-	v47 = Vector3.new(v47.X, v47.Y, v47.Z)
+    if partTele then
+        partTele.CFrame = CFrame.new(partTele.CFrame.X, 1000, partTele.CFrame.Z)
+        task.wait(0.5)
 
-	local v48, v49 = nil, math.huge
+        if CheckInCombat() then
+            return
+        end
 
-	for v50, v51 in pairs(LocalPlayer_) do
+        partTele.CFrame = targetPosition
+        task.wait(0.5)
+        character.PrimaryPart.CFrame = targetPosition
+        character:WaitForChild("Humanoid"):ChangeState(15)
+        task.wait(1)
 
-		if (v51.p - v47).Magnitude < v49 then
+        repeat
+            task.wait(1.5)
+        until character:FindFirstChild("Humanoid") and character.Humanoid.Health <= 0
 
-			v48 = v51
+        repeat
+            task.wait()
 
-			v49 = (v51.p - v47).Magnitude
+            if partTele then
+                partTele.CFrame = targetPosition
+            end
 
-		end
+            if character:FindFirstChild("PrimaryPart") then
+                character.PrimaryPart.CFrame = targetPosition
+            end
 
-	end
-
-	return v48
-
+        until character:FindFirstChild("Humanoid") and character.Humanoid.Health > 0
+    end
 end
 
-function LocalPlayer0_(v52)
+function CheckMagnitude(targetPosition)
+    targetPosition = Vector3.new(targetPosition.X, targetPosition.Y, targetPosition.Z)
 
-	game.ReplicatedStorage.Remotes.CommF_:InvokeServer(unpack({
+    local closestPoint = nil
+    local shortestDistance = math.huge
 
-		"requestEntrance",
+    for _, currentPoint in pairs(LocalPlayer_) do
+        local distance = (currentPoint.p - targetPosition).Magnitude
 
-		v52
+        if distance < shortestDistance then
+            closestPoint = currentPoint
+            shortestDistance = distance
+        end
+    end
 
-	}))
-
-	if LocalPlayer.Character:FindFirstChild("PartTele") then
-
-		LocalPlayer.Character.PartTele.CFrame = LocalPlayer1_(LocalPlayer).CFrame
-
-	end
-
-	task.wait(0.01)
-
+    return closestPoint
 end
 
-function LocalPlayer1_(v53)
+function getTeleportCFrame(player)
+    if player and player.Character and player.Character.PrimaryPart then
+        return player.Character.PrimaryPart.CFrame
+    else
+        return CFrame.new(0, 0, 0)
+    end
+end
 
-	if not v53 then
+function requestEntranceAndTeleport(entranceID)
+    game.ReplicatedStorage.Remotes.CommF_:InvokeServer(unpack({"requestEntrance", entranceID}))
 
-		return
+    local character = LocalPlayer.Character
+    if character:FindFirstChild("PartTele") then
+        character.PartTele.CFrame = getTeleportCFrame(LocalPlayer)
+    end
+    task.wait(0.01)
+end
 
-	end
+function getHumanoidRootPart(player)
+    if not player then
+        return
+    end
 
-	return v53.Character:WaitForChild("HumanoidRootPart", 9) 
+	return player.Character:WaitForChild("HumanoidRootPart", 9)
+end
 
-end 
+function calculateDistance(position1, referenceCFrame)
+    if not referenceCFrame then
+        referenceCFrame = LocalPlayer.Character.PrimaryPart.CFrame
+    end
 
-function LocalPlayer2_(v54, v55)
+    -- Calcula a distância no plano XZ (ignorando a altura Y) OMG TILLI
+    return (Vector3.new(position1.X, 0, position1.Z) - Vector3.new(referenceCFrame.X, 0, referenceCFrame.Z)).Magnitude
+end
 
-	if not v55 then
-
-		v55 = LocalPlayer.Character.PrimaryPart.CFrame
-
-	end
-
-	return (Vector3.new(v54.X, 0, v54.Z) - Vector3.new(v55.X, 0, v55.Z)).Magnitude 
-
-end 
-
-function v8_()
-
+function CheckInCombat()
 	return LocalPlayer.PlayerGui.Main.InCombat.Visible and LocalPlayer.PlayerGui.Main.InCombat.Text and (string.find(string.lower(LocalPlayer.PlayerGui.Main.InCombat.Text), "risk"))
-
 end 
 
-local Players = game:GetService("Players")
-
-local Player = Players.LocalPlayer
-
-local block = Instance.new("Part", workspace)
-
-block.Size = Vector3.new(1, 1, 1)
-
-block.Name = "player platform ............."
-
-block.Anchored = true
-
-block.CanCollide = false
-
-block.CanTouch = false
-
-block.Transparency = 1
-
-
-
-local blockfind = workspace:FindFirstChild(block.Name)
-
-if blockfind and blockfind ~= block then
-
+local playerPlatform = Instance.new("Part", Workspace)
+playerPlatform.Size = Vector3.new(1, 1, 1)
+playerPlatform.Name = "_PlayerPlatform"
+playerPlatform.Anchored = true
+playerPlatform.CanCollide = false
+playerPlatform.CanTouch = false
+playerPlatform.Transparency = 1
+local blockfind = Workspace:FindFirstChild(playerPlatform.Name)
+if blockfind and blockfind ~= playerPlatform then
 	blockfind:Destroy()
-
 end
 
 getgenv().Tween = true
 
 task.spawn(function()
+    repeat task.wait(0) until LocalPlayer.Character and LocalPlayer.Character.PrimaryPart
+    playerPlatform.CFrame = LocalPlayer.Character.PrimaryPart.CFrame
 
-	repeat
+    while task.wait(0) do
+        pcall(function()
+            if getgenv().Tween then
+                if playerPlatform and playerPlatform.Parent == Workspace then
+                    local primaryPart = LocalPlayer.Character and LocalPlayer.Character.PrimaryPart
 
-		task.wait(0)
+                    if primaryPart and (primaryPart.Position - playerPlatform.Position).Magnitude <= 200 then
+                        primaryPart.CFrame = playerPlatform.CFrame
+                    else
+                        playerPlatform.CFrame = primaryPart.CFrame
+                    end
+                end
 
-	until Player.Character and Player.Character.PrimaryPart
+                local playerCharacter = playerPlatform.Character
 
-	block.CFrame = Player.Character.PrimaryPart.CFrame
+                if playerCharacter then
+                    for _, part in pairs(playerCharacter:GetChildren()) do
+                        if part:IsA("BasePart") then
+                            part.CanCollide = false
+                        end
+                    end
 
-	while task.wait(0) do
+                    if playerCharacter:FindFirstChild("Stun") and playerCharacter.Stun.Value ~= 0 then
+                        playerCharacter.Stun.Value = 0
+                    end
 
-		pcall(function()
+                    if playerCharacter:FindFirstChild("Busy") and playerCharacter.Busy.Value then
+                        playerCharacter.Busy.Value = false
+                    end
+                end
 
-			if getgenv().Tween then
+            else
+                local playerCharacter = LocalPlayer.Character
 
-				if block and block.Parent == workspace then
-
-					local plrPP = Player.Character and Player.Character.PrimaryPart
-
-					if plrPP and (plrPP.Position - block.Position).Magnitude <= 200 then
-
-						plrPP.CFrame = block.CFrame
-
-					else
-
-						block.CFrame = plrPP.CFrame
-
-					end
-
-				end
-
-				local plrChar = Player.Character
-
-				if plrChar then
-
-					for _, part in pairs(plrChar:GetChildren()) do
-
-						if part:IsA("BasePart") then
-
-							part.CanCollide = false
-
-						end
-
-					end
-
-					if plrChar:FindFirstChild("Stun") and plrChar.Stun.Value ~= 0 then
-
-						plrChar.Stun.Value = 0
-
-					end
-
-					if plrChar:FindFirstChild("Busy") and plrChar.Busy.Value then
-
-						plrChar.Busy.Value = false
-
-					end
-
-				end
-
-			else
-
-				local plrChar = Player.Character
-
-				if plrChar then
-
-					for _, part in pairs(plrChar:GetChildren()) do
-
-						if part:IsA("BasePart") then
-
-							part.CanCollide = true
-
-						end
-
-					end
-
-				end
-
-			end
-
-		end)
-
-	end
-
+                if playerCharacter then
+                    for _, part in pairs(playerCharacter:GetChildren()) do
+                        if part:IsA("BasePart") then
+                            part.CanCollide = true
+                        end
+                    end
+                end
+            end
+        end)
+    end
 end)
 
+function handleTeleport(targetPosition)
+    if not targetPosition then
+        return
+    end
 
+    LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
+    LocalPlayer.Character:WaitForChild("Head", 9)
 
-function LocalPlayer3_(v56)
+    if not LocalPlayer.Character.HumanoidRootPart:FindFirstChild("Hold") then
+        local bodyVelocity = Instance.new("BodyVelocity", LocalPlayer.Character.HumanoidRootPart)
+        bodyVelocity.Name = "Hold"
+        bodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+        bodyVelocity.Velocity = Vector3.new(0, 0, 0)
+    end
 
-	if not v56 then
+    local teleportPosition = targetPosition.p
+    local primaryPart = LocalPlayer.Character and LocalPlayer.Character.PrimaryPart
 
-		return
+    if not primaryPart then
+        return
+    end
 
-	end
+    local distanceToTarget = (primaryPart.Position - teleportPosition).Magnitude
 
-	LocalPlayer.Character:WaitForChild("HumanoidRootPart", 9)
+    if not LocalPlayer.Character:FindFirstChild("PartTele") then
+        local telePart = Instance.new("Part", LocalPlayer.Character)
+        telePart.Size = Vector3.new(10, 1, 10)
+        telePart.Name = "PartTele"
+        telePart.Anchored = true
+        telePart.Transparency = 1
+        telePart.CanCollide = false
+        telePart.CFrame = getHumanoidRootPart(LocalPlayer).CFrame
+        telePart:GetPropertyChangedSignal("CFrame"):Connect(function()
+            task.wait(0.01)
+            getHumanoidRootPart(LocalPlayer).CFrame = telePart.CFrame
+        end)
+    end
 
-	LocalPlayer.Character:WaitForChild("Head", 9)
+    local closestPosition = FindClosestPosition(targetPosition)
+    local secondPosition = CheckMagnitude(targetPosition)
+    local currentCFrame = getHumanoidRootPart(LocalPlayer).CFrame
+    local distanceToCurrentCFrame = calculateDistance(currentCFrame, targetPosition)
 
-	if not LocalPlayer.Character.HumanoidRootPart:FindFirstChild("Hold") then
+    if calculateDistance(closestPosition, targetPosition) < calculateDistance(targetPosition) and calculateDistance(closestPosition) > 500 then
+        return requestEntranceAndTeleport(closestPosition)
+    end
 
-		local v57 = Instance.new("BodyVelocity", LocalPlayer.Character.HumanoidRootPart)
+    if not CheckInCombat() and calculateDistance(targetPosition) - calculateDistance(secondPosition, targetPosition) > 1000 and calculateDistance(secondPosition) > 1000 then
+        return TPToPosition(secondPosition)
+    end
 
-		v57.Name = "Hold"
+    if LocalPlayer.Character:FindFirstChild("Humanoid") and LocalPlayer.Character.Humanoid:FindFirstChild("Sit") and LocalPlayer.Character.Humanoid.Sit == true then
+        LocalPlayer.Character.Humanoid.Sit = false
+    end
 
-		v57.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-
-		v57.Velocity = Vector3.new(0, 0, 0)
-
-	end
-
-	TeleportPos = v56.p
-
-	local plrPP = Player.Character and Player.Character.PrimaryPart
-
-	if not plrPP then
-
-		return
-
-	end
-
-	local Distance = (plrPP.Position - v56.p).Magnitude
-
-	if not LocalPlayer.Character:FindFirstChild("PartTele") then
-
-		local v58 = Instance.new("Part", LocalPlayer.Character)
-
-		v58.Size = Vector3.new(10, 1, 10)
-
-		v58.Name = "PartTele"
-
-		v58.Anchored = true
-
-		v58.Transparency = 1
-
-		v58.CanCollide = false
-
-		v58.CFrame = LocalPlayer1_(LocalPlayer).CFrame
-
-		v58:GetPropertyChangedSignal("CFrame"):Connect(function()
-
-			task.wait(0.01)
-
-			LocalPlayer1_(LocalPlayer).CFrame = v58.CFrame
-
-		end)
-
-	end
-
-	LocalPlayer4_ = v6_(v56)
-
-	LocalPlayer5_ = v9_(v56)
-
-	LocalPlayer6_ = LocalPlayer1_(LocalPlayer).CFrame
-
-	LocalPlayer7_ = LocalPlayer2_(LocalPlayer6_, v56)
-
-	if LocalPlayer2_(LocalPlayer4_, v56) < LocalPlayer2_(v56) and LocalPlayer2_(LocalPlayer4_) > 500 then
-
-		return LocalPlayer0_(LocalPlayer4_)
-
-	end
-
-	if not v8_() and LocalPlayer2_(v56) - LocalPlayer2_(LocalPlayer5_, v56) > 1000 and LocalPlayer2_(LocalPlayer5_) > 1000 then
-
-		return v7_(LocalPlayer5_)
-
-	end
-
-	if LocalPlayer.Character:FindFirstChild("Humanoid") and LocalPlayer.Character.Humanoid:FindFirstChild("Sit") and LocalPlayer.Character.Humanoid.Sit == true then
-
-		LocalPlayer.Character.Humanoid.Sit = false
-
-	end
-
-	if LocalPlayer7_ <= 150 then
-
-		block.CFrame = v56
-
-	else
-
-		LocalPlayer8_ = game:GetService("TweenService"):Create(block, TweenInfo.new(LocalPlayer7_ / 350, Enum.EasingStyle.Linear), {
-
-			CFrame = v56
-
-		})
-
-		LocalPlayer8_:Play()
-
-	end
-
+    if distanceToCurrentCFrame <= 150 then
+        playerPlatform.CFrame = targetPosition
+    else
+        local tween = game:GetService("TweenService"):Create(playerPlatform, TweenInfo.new(distanceToCurrentCFrame / 350, Enum.EasingStyle.Linear), {
+            CFrame = targetPosition
+        })
+        tween:Play()
+    end
 end
 
 --// Equip
@@ -1114,7 +960,7 @@ end)
 
 function v32_(LocalPlayer24)
 
-if not v8_() then
+if not CheckInCombat() then
 
 	local LocalPlayer25 = game.PlaceId;
 
@@ -1248,7 +1094,7 @@ function v34_()
 
 	for LocalPlayer41, LocalPlayer42 in pairs(game.Players:GetPlayers()) do
 
-		if LocalPlayer42 and LocalPlayer42.Team and LocalPlayer42.Character and LocalPlayer42.Character:FindFirstChild("Head") and string.find(string.lower(tostring(LocalPlayer42.Team)), "es") and (tostring(LocalPlayer.Team) == "Pirates" or tostring(LocalPlayer42.Team) == "Pirates") and LocalPlayer.Data.Level.Value - LocalPlayer42.Data.Level.Value < 300 and LocalPlayer2_(v9_(LocalPlayer42.Character.HumanoidRootPart.CFrame), LocalPlayer42.Character.HumanoidRootPart.CFrame) < 3500 and not ({["Portal-Portal"] = true,["Leopard-Leopard"] = true,["Buddha-Buddha"] = true,["Kitsune-Kitsune"] = true})[tostring(LocalPlayer42.Data.DevilFruit.Value)] and not table.find(v33_, LocalPlayer42) and not table.find(v35_, LocalPlayer42) and ((getgenv().Setting["Skip Player V4"] and not (LocalPlayer42.Backpack:FindFirstChild("Awakening") or LocalPlayer42.Character:FindFirstChild("Awakening"))) or not getgenv().Setting["Skip Player V4"]) then
+		if LocalPlayer42 and LocalPlayer42.Team and LocalPlayer42.Character and LocalPlayer42.Character:FindFirstChild("Head") and string.find(string.lower(tostring(LocalPlayer42.Team)), "es") and (tostring(LocalPlayer.Team) == "Pirates" or tostring(LocalPlayer42.Team) == "Pirates") and LocalPlayer.Data.Level.Value - LocalPlayer42.Data.Level.Value < 300 and calculateDistance(CheckMagnitude(LocalPlayer42.Character.HumanoidRootPart.CFrame), LocalPlayer42.Character.HumanoidRootPart.CFrame) < 3500 and not ({["Portal-Portal"] = true,["Leopard-Leopard"] = true,["Buddha-Buddha"] = true,["Kitsune-Kitsune"] = true})[tostring(LocalPlayer42.Data.DevilFruit.Value)] and not table.find(v33_, LocalPlayer42) and not table.find(v35_, LocalPlayer42) and ((getgenv().Setting["Skip Player V4"] and not (LocalPlayer42.Backpack:FindFirstChild("Awakening") or LocalPlayer42.Character:FindFirstChild("Awakening"))) or not getgenv().Setting["Skip Player V4"]) then
 
 			table.insert(v35_, LocalPlayer42)
 
@@ -1272,11 +1118,11 @@ function v36_()
 
 			if LocalPlayer and LocalPlayer.Parent and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
 
-				if LocalPlayer2_(LocalPlayer44.Character.HumanoidRootPart.CFrame, LocalPlayer.Character.HumanoidRootPart.CFrame) < v37_ then
+				if calculateDistance(LocalPlayer44.Character.HumanoidRootPart.CFrame, LocalPlayer.Character.HumanoidRootPart.CFrame) < v37_ then
 
 					v38_ = LocalPlayer44
 
-					v37_ = LocalPlayer2_(LocalPlayer44.Character.HumanoidRootPart.CFrame, LocalPlayer.Character.HumanoidRootPart.CFrame)
+					v37_ = calculateDistance(LocalPlayer44.Character.HumanoidRootPart.CFrame, LocalPlayer.Character.HumanoidRootPart.CFrame)
 
 				end
 
@@ -1308,7 +1154,7 @@ function v40_(LocalPlayer45)
 
 		local LocalPlayer47 = game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island" .. LocalPlayer46)
 
-		if LocalPlayer47 and LocalPlayer1_(LocalPlayer45, LocalPlayer47:GetModelCFrame()) < 3000 then
+		if LocalPlayer47 and getHumanoidRootPart(LocalPlayer45, LocalPlayer47:GetModelCFrame()) < 3000 then
 
 			return true
 
@@ -1390,7 +1236,7 @@ function v44_()
 
 		if os.time() - v43_ > 100 then
 
-			if not v8_() then
+			if not CheckInCombat() then
 
 				return v36_()
 
@@ -1546,7 +1392,7 @@ spawn(function()
 
 		if v44_() then
 
-			if Workspace2_:DistanceFromCharacter(LocalPlayer1_(LocalPlayer).Position) <= 30 then
+			if Workspace2_:DistanceFromCharacter(getHumanoidRootPart(LocalPlayer).Position) <= 30 then
 
 				local LocalPlayer66 = Workspace9_(getgenv().Setting)
 
@@ -1618,7 +1464,7 @@ spawn(function()
 
 		if v39_ then
 
-			LocalPlayer3_(CFrame.new(0, 9000, 0))
+			handleTeleport(CFrame.new(0, 9000, 0))
 
 		else
 
@@ -1656,13 +1502,13 @@ spawn(function()
 
 					v59_ = true
 
-					LocalPlayer3_(LocalPlayer1_(Workspace2_).CFrame + Vector3.new(0, math.random(9999, 99999), 0))
+					handleTeleport(getHumanoidRootPart(Workspace2_).CFrame + Vector3.new(0, math.random(9999, 99999), 0))
 
 				else
 
 					v59_ = false
 
-					local LocalPlayer73 = LocalPlayer1_(Workspace2_).CFrame + (LocalPlayer1_(Workspace2_).Velocity / 2)
+					local LocalPlayer73 = getHumanoidRootPart(Workspace2_).CFrame + (getHumanoidRootPart(Workspace2_).Velocity / 2)
 
 					if LocalPlayer73.Y < 10 then
 
@@ -1670,17 +1516,17 @@ spawn(function()
 
 					end
 
-					v31_ = LocalPlayer1_(Workspace2_).CFrame
+					v31_ = getHumanoidRootPart(Workspace2_).CFrame
 
 					if Workspace2_.Character:FindFirstChild("Busy") and Workspace2_.Character.Busy.Value then
 
-						LocalPlayer3_(v56_(v31_))
+						handleTeleport(v56_(v31_))
 
 					else
 
 						if Workspace2_.Character:FindFirstChild("Humanoid") and Workspace2_.Character.Humanoid.MoveDirection.Magnitude > 0 then
 
-							LocalPlayer3_(LocalPlayer73 + Vector3.new(1, 4, 1))
+							handleTeleport(LocalPlayer73 + Vector3.new(1, 4, 1))
 
 							if (not LocalPlayer.Character:FindFirstChild("Busy") or not LocalPlayer.Character.Busy.Value) and not game:GetService("Players").LocalPlayer.PlayerGui.Main.InCombat.Visible then
 
@@ -1690,7 +1536,7 @@ spawn(function()
 
 						else
 
-							LocalPlayer3_(v31_ + Vector3.new(1, 4, 1))
+							handleTeleport(v31_ + Vector3.new(1, 4, 1))
 
 						end
 
