@@ -1,5 +1,7 @@
 getgenv().Config = {
 	["Misc"] = {
+		["TeamMode"] = "Marines",
+		["Skip Player V4"] = false,
 		["Click Delay"] = 0.15,
 		["Enable Lock Bounty"] = false,
 		["Lock Bounty"] = {0, 300000000},
@@ -22,7 +24,7 @@ if playerGui.Main:FindFirstChild("ChooseTeam") then
     local chooseTeamGui = playerGui:WaitForChild("Main").ChooseTeam
 
     if chooseTeamGui.Visible == true then
-        if getgenv().Setting["TeamMode"] == "Marines" then
+        if getgenv().Config.Misc["TeamMode"] == "Marines" then
             local marinesButton = chooseTeamGui.Container["Marines"].Frame.TextButton
 
             for _, marinesConnection in pairs(getconnections(marinesButton.Activated)) do
@@ -1085,21 +1087,13 @@ v33_ = {}
 table.insert(v33_, LocalPlayer)
 
 function v34_()
-
 	v35_ = {}
-
 	for LocalPlayer41, LocalPlayer42 in pairs(game.Players:GetPlayers()) do
-
-		if LocalPlayer42 and LocalPlayer42.Team and LocalPlayer42.Character and LocalPlayer42.Character:FindFirstChild("Head") and string.find(string.lower(tostring(LocalPlayer42.Team)), "es") and (tostring(LocalPlayer.Team) == "Pirates" or tostring(LocalPlayer42.Team) == "Pirates") and LocalPlayer.Data.Level.Value - LocalPlayer42.Data.Level.Value < 300 and calculateDistance(CheckMagnitude(LocalPlayer42.Character.HumanoidRootPart.CFrame), LocalPlayer42.Character.HumanoidRootPart.CFrame) < 3500 and not ({["Portal-Portal"] = true,["Leopard-Leopard"] = true,["Buddha-Buddha"] = true,["Kitsune-Kitsune"] = true})[tostring(LocalPlayer42.Data.DevilFruit.Value)] and not table.find(v33_, LocalPlayer42) and not table.find(v35_, LocalPlayer42) and ((getgenv().Setting["Skip Player V4"] and not (LocalPlayer42.Backpack:FindFirstChild("Awakening") or LocalPlayer42.Character:FindFirstChild("Awakening"))) or not getgenv().Setting["Skip Player V4"]) then
-
+		if LocalPlayer42 and LocalPlayer42.Team and LocalPlayer42.Character and LocalPlayer42.Character:FindFirstChild("Head") and string.find(string.lower(tostring(LocalPlayer42.Team)), "es") and (tostring(LocalPlayer.Team) == "Pirates" or tostring(LocalPlayer42.Team) == "Pirates") and LocalPlayer.Data.Level.Value - LocalPlayer42.Data.Level.Value < 300 and calculateDistance(CheckMagnitude(LocalPlayer42.Character.HumanoidRootPart.CFrame), LocalPlayer42.Character.HumanoidRootPart.CFrame) < 3500 and not ({["Portal-Portal"] = true,["Leopard-Leopard"] = true,["Buddha-Buddha"] = true,["Kitsune-Kitsune"] = true})[tostring(LocalPlayer42.Data.DevilFruit.Value)] and not table.find(v33_, LocalPlayer42) and not table.find(v35_, LocalPlayer42) and ((getgenv().Config["Skip Player V4"] and not (LocalPlayer42.Backpack:FindFirstChild("Awakening") or LocalPlayer42.Character:FindFirstChild("Awakening"))) or not getgenv().Config.Misc["Skip Player V4"]) then
 			table.insert(v35_, LocalPlayer42)
-
 		end
-
 	end
-
 	return v35_
-
 end
 
 function v36_()
@@ -1360,7 +1354,7 @@ spawn(function()
 
 			if Workspace2_:DistanceFromCharacter(getHumanoidRootPart(LocalPlayer).Position) <= 30 then
 
-				local LocalPlayer66 = Workspace9_(getgenv().Setting)
+				local LocalPlayer66 = Workspace9_(getgenv().Config)
 
 				if LocalPlayer66 then
 
@@ -1464,7 +1458,7 @@ spawn(function()
 
 				end
 
-				if tonumber(LocalPlayer.Character.Humanoid.Health) > 0 and (tonumber(LocalPlayer.Character.Humanoid.Health) < getgenv().Setting["Safe Health"][1] or (v59_ and tonumber(LocalPlayer.Character.Humanoid.Health) < getgenv().Setting["Safe Health"][2])) then
+				if tonumber(LocalPlayer.Character.Humanoid.Health) > 0 and (tonumber(LocalPlayer.Character.Humanoid.Health) < getgenv().Config["Safe Health"][1] or (v59_ and tonumber(LocalPlayer.Character.Humanoid.Health) < getgenv().Config["Safe Health"][2])) then
 
 					v59_ = true
 
