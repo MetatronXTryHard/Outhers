@@ -1,8 +1,4 @@
 getgenv().Config = {
-	["Chat"] = {
-		""
-	},
-
 	["Misc"] = {
 		["Click Delay"] = 0.15,
 		["Enable Lock Bounty"] = false,
@@ -12,7 +8,7 @@ getgenv().Config = {
 		["White Screen"] = false,
 		["FPS Boost"] = false,
 		["Tween"] = true,
-		["Random & Store Fruit"] = false
+		["Random & Store Fruit"] = false,
 }}
 
 
@@ -51,7 +47,7 @@ end
 getgenv().AutoRejoin = true
 
 spawn(function()
-	while wait() do
+	while task.wait() do
 		if getgenv().AutoRejoin then
 			getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(LagBack);
 				if LagBack.Name == "ErrorPrompt" and LagBack:FindFirstChild("MessageArea") and LagBack.MessageArea:FindFirstChild("ErrorFrame") then
@@ -1280,56 +1276,26 @@ else
 
 end
 
+local ConfigFolder = "StarHubAutoBouty"
+local ConfigFile = ConfigFolder .. "/Config.json"
 
+function saveGlobalConfig()
+    local httpService = game:GetService("HttpService")
+    local jsonConfig = httpService:JSONEncode(ConfigFile)
 
-local LocalPlayer2 = "RinXHubAutoBounty"
+    if not isfolder(ConfigFolder) then
+        makefolder(ConfigFolder)
+    end
 
-local LocalPlayer3 = LocalPlayer2 .. "/Config.json"
-
-function v46_()
-
-	local LocalPlayer51 = game:GetService("HttpService")
-
-	local LocalPlayer52 = LocalPlayer51:JSONEncode(_G)
-
-	if true then
-
-		if isfolder(LocalPlayer2) then
-
-			if isfile(LocalPlayer3) then
-
-				writefile(LocalPlayer3, LocalPlayer52)
-
-			else
-
-				writefile(LocalPlayer3, LocalPlayer52)
-
-			end
-
-		else
-
-			makefolder(LocalPlayer2)
-
-		end
-
-	end
-
+    writefile(ConfigFile, jsonConfig)
 end
 
-function v47_()
+function loadGlobalConfig()
+    local httpService = game:GetService("HttpService")
 
-	local LocalPlayer53 = game:GetService("HttpService")
-
-	if isfolder(LocalPlayer2) then
-
-		if isfile(LocalPlayer3) then
-
-			_G = LocalPlayer53:JSONDecode(readfile(LocalPlayer3))
-
-		end
-
-	end
-
+    if isfolder(ConfigFolder) and isfile(ConfigFile) then
+        _G = httpService:JSONDecode(readfile(ConfigFile))
+    end
 end
 
 getgenv().Total = 0
